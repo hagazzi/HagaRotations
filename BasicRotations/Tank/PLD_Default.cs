@@ -14,7 +14,7 @@ public class PLD_Default : PaladinRotation
 
     [RotationConfig(CombatType.PvE, Name = "Use Shield Bash when Low Blow is cooling down")]
     public bool UseShieldBash { get; set; } = true;
-    #endregion 
+    #endregion
 
     public static bool HasGoringBladeReady => Player.HasStatus(true, StatusID.GoringBladeReady);
     public static bool HasAtonementReady => Player.HasStatus(true, StatusID.AtonementReady);
