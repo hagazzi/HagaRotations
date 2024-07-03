@@ -3,7 +3,7 @@
 [Rotation("HagaPLD", CombatType.PvE, GameVersion = "7.0")]
 [SourceCode(Path = "main/DefaultRotations/Tank/PLD_Default.cs")]
 [Api(2)]
-public class PLD_Default : PaladinRotation
+public sealed class HagaPLD : PaladinRotation
 {
     #region Config Options
     [RotationConfig(CombatType.PvE, Name = "Use Divine Veil at 15 seconds remaining on Countdown")]

@@ -5,7 +5,7 @@ namespace DefaultRotations.Magical;
 [Rotation("HagaSMN", CombatType.PvE, GameVersion = "7.0")]
 [SourceCode(Path = "main/DefaultRotations/Magical/SMN_Default.cs")]
 [Api(2)]
-public sealed class SMN_Default : SummonerRotation
+public sealed class HagaSMN : SummonerRotation
 {
     #region Config Options
     public enum SwiftType : byte

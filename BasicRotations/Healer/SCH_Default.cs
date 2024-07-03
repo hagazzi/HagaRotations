@@ -3,7 +3,7 @@ namespace DefaultRotations.Healer;
 [Rotation("HagaSCH", CombatType.PvE, GameVersion = "7.0")]
 [SourceCode(Path = "main/DefaultRotations/Healer/SCH_Default.cs")]
 [Api(2)]
-public sealed class SCH_Default : ScholarRotation
+public sealed class HagaSCH : ScholarRotation
 {
     #region Config Options
     [RotationConfig(CombatType.PvE, Name = "Use spells with cast times to heal. (Ignored if you are the only healer in party)")]
