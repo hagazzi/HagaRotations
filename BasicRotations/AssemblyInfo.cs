@@ -1,1 +1,1 @@
-﻿[assembly: AssemblyLink(Donate = "", UserName = "hagazzi", Repository = "LTSDefaults")]
+﻿[assembly: AssemblyLink(Donate = "", UserName = "hagazzi", Repository = "HagaRotations")]
