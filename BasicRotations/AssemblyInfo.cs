@@ -1,0 +1,1 @@
+﻿[assembly: AssemblyLink(Donate = "", UserName = "hagazzi", Repository = "LTSDefaults")]
