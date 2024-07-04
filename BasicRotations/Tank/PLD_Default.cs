@@ -130,25 +130,25 @@ public sealed class HagaPLD : PaladinRotation
     #region GCD Logic
     protected override bool GeneralGCD(out IAction? act)
     {
-        if (Player.HasStatus(true, StatusID.Requiescat))
-        {
+        //if (Player.HasStatus(true, StatusID.Requiescat))
+        //{
             //if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true))
             //{
             //    if (Player.HasStatus(true, StatusID.ConfiteorReady)) return true;
             //    if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
             //}
-            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            if (BoVPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            //if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BoVPvE.CanUse(out act)) return true;
             //if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            if (BoTPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BoTPvE.CanUse(out act)) return true;
             //if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            if (BoFPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BoFPvE.CanUse(out act)) return true;
             //if (BladeOfFaithPVE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (ConfiPvE.CanUse(out act)) return true;
             //if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             //if (HolyCirclePvE.CanUse(out act)) return true;
             //if (HolySpiritPvE.CanUse(out act)) return true;
-        }
+        //}
 
         //AOE
         if (HasDivineMight && HolyCirclePvE.CanUse(out act)) return true;
