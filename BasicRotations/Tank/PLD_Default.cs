@@ -33,6 +33,8 @@ public sealed class HagaPLD : PaladinRotation
     private const ActionID BoVPvEActionId = (ActionID)25750;
     private IBaseAction BoVPvE = new BaseAction(BoVPvEActionId);
 
+    private const ActionID ConfiPvEActionId = (ActionID)16459;
+    private IBaseAction ConfiPvE = new BaseAction(ConfiPvEActionId);
 
     #region Countdown Logic
     protected override IAction? CountDownAction(float remainTime)
@@ -141,8 +143,9 @@ public sealed class HagaPLD : PaladinRotation
             if (BoTPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
             //if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
             if (BoFPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            //if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            //if (BladeOfFaithPVE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            //if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             //if (HolyCirclePvE.CanUse(out act)) return true;
             //if (HolySpiritPvE.CanUse(out act)) return true;
         }
