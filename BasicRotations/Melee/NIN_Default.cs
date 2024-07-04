@@ -1,9 +1,9 @@
 namespace DefaultRotations.Melee;
 
-[Rotation("Default", CombatType.PvE, GameVersion = "6.58")]
+[Rotation("Default", CombatType.PvE, GameVersion = "7.0")]
 [SourceCode(Path = "main/DefaultRotations/Melee/NIN_Default.cs")]
-[Api(1)]
-public sealed class NIN_Default : NinjaRotation
+[Api(2)]
+public sealed class HagaNIN : NinjaRotation
 {
     #region Config Options
     // Configuration properties for rotation behavior.
