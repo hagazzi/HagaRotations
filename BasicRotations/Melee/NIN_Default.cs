@@ -320,7 +320,7 @@ public sealed class HagaNIN : NinjaRotation
     {
         // Initializes the action to null, indicating no action has been chosen yet.
         act = null;
-
+        MeisuiPvE.Setting.StatusNeed = [StatusID.ShadowWalker];
         TrickAttackPvE.Setting.StatusNeed = [StatusID.ShadowWalker, StatusID.Hidden];
 
         // If Ninjutsu is available or not in combat, defers to the base class's emergency ability logic.
