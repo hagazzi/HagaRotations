@@ -121,11 +121,16 @@ public sealed class HagaPLD : PaladinRotation
     {
         if (Player.HasStatus(true, StatusID.Requiescat))
         {
-            if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true))
-            {
-                if (Player.HasStatus(true, StatusID.ConfiteorReady)) return true;
-                if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
-            }
+            //if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true))
+            //{
+            //    if (Player.HasStatus(true, StatusID.ConfiteorReady)) return true;
+            //    if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
+            //}
+            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (HolyCirclePvE.CanUse(out act)) return true;
             if (HolySpiritPvE.CanUse(out act)) return true;
         }
