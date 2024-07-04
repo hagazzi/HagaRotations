@@ -129,14 +129,14 @@ public sealed class HagaPLD : PaladinRotation
             //    if (Player.HasStatus(true, StatusID.ConfiteorReady)) return true;
             //    if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
             //}
-            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
             //if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (HolyCirclePvE.CanUse(out act)) return true;
-            if (HolySpiritPvE.CanUse(out act)) return true;
+            //if (HolyCirclePvE.CanUse(out act)) return true;
+            //if (HolySpiritPvE.CanUse(out act)) return true;
         }
 
         //AOE
@@ -152,8 +152,8 @@ public sealed class HagaPLD : PaladinRotation
         if (!CombatElapsedLess(8) && HasGoringBladeReady && GoringBladePvE.CanUse(out act)) return true; // Dot
         if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(2))
         {
-            if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(6) &&
-                HasDivineMight && !Player.HasStatus(true, StatusID.Requiescat) && HolySpiritPvE.CanUse(out act)) return true;
+            //if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(6) &&
+            //    HasDivineMight && !Player.HasStatus(true, StatusID.Requiescat) && HolySpiritPvE.CanUse(out act)) return true;
             if (RageOfHalonePvE.CanUse(out act)) return true;
             if (AtonementPvE.CanUse(out act)) return true;
         }
