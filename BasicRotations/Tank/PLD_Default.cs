@@ -42,8 +42,8 @@ public sealed class HagaPLD : PaladinRotation
         //if (remainTime < HolySpiritPvE.Info.CastTime + CountDownAhead
         //    && HolySpiritPvE.CanUse(out var act)) return act;
 
-        if (remainTime < 15 && UseDivineVeilPre
-            && DivineVeilPvE.CanUse(out act)) return act;
+        //if (remainTime < 15 && UseDivineVeilPre
+        //    && DivineVeilPvE.CanUse(out act)) return act;
 
         return base.CountDownAction(remainTime);
     }
