@@ -1,3 +1,6 @@
+using FFXIVClientStructs.FFXIV.Client.Game.Gauge;
+using static FFXIVClientStructs.FFXIV.Client.UI.Misc.DataCenterHelper;
+
 namespace DefaultRotations.Melee;
 
 [Rotation("Default", CombatType.PvE, GameVersion = "7.0")]
@@ -12,6 +15,18 @@ public sealed class HagaNIN : NinjaRotation
     [RotationConfig(CombatType.PvE, Name = "Use Unhide")]
     public bool AutoUnhide { get; set; } = true;
 
+    private const ActionID HMediumActionId = (ActionID)7401;
+    private IBaseAction HMediumPvE = new BaseAction(HMediumActionId);
+
+    private const ActionID BhavaActionId = (ActionID)7401;
+    private IBaseAction BhavaPvE = new BaseAction(BhavaActionId);
+
+    private const ActionID MeisActionId = (ActionID)16489;
+    private IBaseAction MeisPvE = new BaseAction(MeisActionId);
+
+    private const ActionID BunActionId = (ActionID)16493;
+    private IBaseAction BunPvE = new BaseAction(BunActionId);
+
     #endregion
 
     #region CountDown Logic
@@ -21,7 +36,8 @@ public sealed class HagaNIN : NinjaRotation
 
         // Clears ninjutsu setup if countdown is more than 10 seconds or if Huton is the aim but shouldn't be.
         if (remainTime > 10) ClearNinjutsu();
-        var realInHuton = !HutonEndAfterGCD() || IsLastAction(false, HutonPvE);
+        //!HutonEndAfterGCD() ||
+        var realInHuton =  IsLastAction(false, HutonPvE);
         if (realInHuton && _ninActionAim == HutonPvE) ClearNinjutsu();
 
         // Decision-making for ninjutsu actions based on remaining time until combat starts.
@@ -128,7 +144,8 @@ public sealed class HagaNIN : NinjaRotation
             // For instance, setting Huton for speed buff or choosing AoE Ninjutsu like Katon or Doton based on enemy positioning.
             // Also considers using Suiton for vulnerability debuff on the enemy if conditions are optimal.
             //if (HuraijinPvE.CanUse(out act)) return true;
-            if (!HutonEndAfterGCD() && _ninActionAim?.ID == HutonPvE.ID)
+            //!HutonEndAfterGCD() &&
+            if (_ninActionAim?.ID == HutonPvE.ID)
             {
                 ClearNinjutsu();
                 return false;
@@ -341,8 +358,10 @@ public sealed class HagaNIN : NinjaRotation
             // Attempts to use Trick Attack if it's available.
             if (TrickAttackPvE.CanUse(out act)) return true;
 
+            //!TrickAttackPvE.Cooldown.WillHaveOneCharge(19) &&
             // If Trick Attack is on cooldown but will not be ready soon, considers using Meisui to recover Ninki.
-            if (TrickAttackPvE.Cooldown.IsCoolingDown && !TrickAttackPvE.Cooldown.WillHaveOneCharge(19) && MeisuiPvE.CanUse(out act)) return true;
+            if (TrickAttackPvE.Cooldown.IsCoolingDown && Player.HasStatus(true, StatusID.ShadowWalker) && MeisPvE.CanUse(out act)) return true;
+            //MeisuiPvE.CanUse(out act)) return true;
         }
         // If none of the specific conditions are met, falls back to the base class's emergency ability logic.
         return base.EmergencyAbility(nextGCD, out act);
@@ -360,7 +379,7 @@ public sealed class HagaNIN : NinjaRotation
         if (!IsMoving && InTrickAttack && !TenPvE.Cooldown.ElapsedAfter(30) && TenChiJinPvE.CanUse(out act)) return true;
 
         // If more than 5 seconds have passed in combat, checks if Bunshin is available to use.
-        if (!CombatElapsedLess(5) && BunshinPvE.CanUse(out act)) return true;
+        if (!CombatElapsedLess(5) && BunPvE.CanUse(out act)) return true;
 
         // Special handling if within Trick Attack's effective window:
         if (InTrickAttack)
@@ -381,15 +400,21 @@ public sealed class HagaNIN : NinjaRotation
         // - Not in the Mug's effective window or within Trick Attack's window
         // - Certain cooldown conditions are met, or specific statuses are active.
 
-        if (Ninki == 100)
-        {
-            if (HellfrogMediumPvE.CanUse(out act)) return true;
-            if (BhavacakraPvE.CanUse(out act)) return true;
-        }
+        //if (Ninki >= 50)
+        //{
+        //    if (HellfrogMediumPvE.CanUse(out act)) return true;
+        //    if (BhavacakraPvE.CanUse(out act)) return true;
+        //}
+
+        //&& ((HutonTime * 1000f) >= 50)
         if ((!InMug || InTrickAttack)
-            && (!BunshinPvE.Cooldown.WillHaveOneCharge(10) || Player.HasStatus(false, StatusID.PhantomKamaitachiReady) || MugPvE.Cooldown.WillHaveOneCharge(2)))
-        {
+            && (!BunshinPvE.Cooldown.WillHaveOneCharge(10) || Player.HasStatus(false, StatusID.PhantomKamaitachiReady) || MugPvE.Cooldown.WillHaveOneCharge(2))
+            && (Ninki >= 50 ))
+        { 
+
+            //if (HMediumPvE.CanUse(out act)) return true;
             if (HellfrogMediumPvE.CanUse(out act)) return true;
+            //if (BhavaPvE.CanUse(out act)) return true;
             if (BhavacakraPvE.CanUse(out act)) return true;
         }
         if (MergedStatus.HasFlag(AutoStatus.MoveForward) && MoveForwardAbility(nextGCD, out act)) return true;
@@ -461,10 +486,11 @@ public sealed class HagaNIN : NinjaRotation
     // Displays the current status of the rotation, including the aimed ninjutsu action, if any.
     public override void DisplayStatus()
     {
-        if (_ninActionAim != null)
-        {
-            ImGui.Text(_ninActionAim.ToString() + _ninActionAim.AdjustedID.ToString());
-        }
+        //if (_ninActionAim != null)
+        //{
+        //    ImGui.Text(_ninActionAim.ToString() + _ninActionAim.AdjustedID.ToString());
+        //}
+        ImGui.Text(Ninki.ToString());
         base.DisplayStatus();
     }
     #endregion
