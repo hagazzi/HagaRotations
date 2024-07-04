@@ -135,8 +135,8 @@ public sealed class HagaPLD : PaladinRotation
             //if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (HolyCirclePvE.CanUse(out act)) return true;
-            if (HolySpiritPvE.CanUse(out act)) return true;
+            //if (HolyCirclePvE.CanUse(out act)) return true;
+            //if (HolySpiritPvE.CanUse(out act)) return true;
         }
 
         //AOE
@@ -168,8 +168,8 @@ public sealed class HagaPLD : PaladinRotation
         //Range
         if (UseHolyWhenAway)
         {
-            if (HolyCirclePvE.CanUse(out act)) return true;
-            if (HolySpiritPvE.CanUse(out act)) return true;
+            //if (HolyCirclePvE.CanUse(out act)) return true;
+            //if (HolySpiritPvE.CanUse(out act)) return true;
         }
         if (ShieldLobPvE.CanUse(out act)) return true;
 
