@@ -39,8 +39,8 @@ public sealed class HagaPLD : PaladinRotation
     #region Countdown Logic
     protected override IAction? CountDownAction(float remainTime)
     {
-        if (remainTime < HolySpiritPvE.Info.CastTime + CountDownAhead
-            && HolySpiritPvE.CanUse(out var act)) return act;
+        //if (remainTime < HolySpiritPvE.Info.CastTime + CountDownAhead
+        //    && HolySpiritPvE.CanUse(out var act)) return act;
 
         if (remainTime < 15 && UseDivineVeilPre
             && DivineVeilPvE.CanUse(out act)) return act;
@@ -184,11 +184,11 @@ public sealed class HagaPLD : PaladinRotation
 
 
         //Range
-        if (UseHolyWhenAway)
-        {
-            if (HolyCirclePvE.CanUse(out act)) return true;
-            if (HolySpiritPvE.CanUse(out act)) return true;
-        }
+        //if (UseHolyWhenAway)
+        //{
+        //    if (HolyCirclePvE.CanUse(out act)) return true;
+        //    if (HolySpiritPvE.CanUse(out act)) return true;
+        //}
         if (ShieldLobPvE.CanUse(out act)) return true;
 
         return base.GeneralGCD(out act);
