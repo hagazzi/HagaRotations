@@ -10,7 +10,7 @@
     <None Remove="Duty\PVPRotations\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="RotationSolverReborn.Basic" Version="7.0.0.9" />
+    <PackageReference Include="RotationSolverReborn.Basic" Version="7.0.0.13" />
   </ItemGroup>
   <ItemGroup>
 	  <Reference Include="Dalamud">
