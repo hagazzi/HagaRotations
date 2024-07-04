@@ -27,6 +27,12 @@ public sealed class HagaPLD : PaladinRotation
     private const ActionID BoFPvEActionId = (ActionID)25748;
     private IBaseAction BoFPvE = new BaseAction(BoFPvEActionId);
 
+    private const ActionID BoTPvEActionId = (ActionID)25749;
+    private IBaseAction BoTPvE = new BaseAction(BoTPvEActionId);
+
+    private const ActionID BoVPvEActionId = (ActionID)25750;
+    private IBaseAction BoVPvE = new BaseAction(BoVPvEActionId);
+
 
     #region Countdown Logic
     protected override IAction? CountDownAction(float remainTime)
@@ -130,9 +136,11 @@ public sealed class HagaPLD : PaladinRotation
             //    if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
             //}
             if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BoVPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            //if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BoTPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            //if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BoFPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
             //if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             //if (HolyCirclePvE.CanUse(out act)) return true;
