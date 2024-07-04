@@ -11,6 +11,7 @@ public sealed class HagaNIN : NinjaRotation
     public bool UseHide { get; set; } = true;
     [RotationConfig(CombatType.PvE, Name = "Use Unhide")]
     public bool AutoUnhide { get; set; } = true;
+
     #endregion
 
     #region CountDown Logic
@@ -320,6 +321,8 @@ public sealed class HagaNIN : NinjaRotation
         // Initializes the action to null, indicating no action has been chosen yet.
         act = null;
 
+        TrickAttackPvE.Setting.StatusNeed = [StatusID.ShadowWalker, StatusID.Hidden];
+
         // If Ninjutsu is available or not in combat, defers to the base class's emergency ability logic.
         if (!NoNinjutsu || !InCombat) return base.EmergencyAbility(nextGCD, out act);
 
@@ -341,7 +344,6 @@ public sealed class HagaNIN : NinjaRotation
             // If Trick Attack is on cooldown but will not be ready soon, considers using Meisui to recover Ninki.
             if (TrickAttackPvE.Cooldown.IsCoolingDown && !TrickAttackPvE.Cooldown.WillHaveOneCharge(19) && MeisuiPvE.CanUse(out act)) return true;
         }
-
         // If none of the specific conditions are met, falls back to the base class's emergency ability logic.
         return base.EmergencyAbility(nextGCD, out act);
     }

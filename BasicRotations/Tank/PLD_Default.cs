@@ -130,6 +130,7 @@ public sealed class HagaPLD : PaladinRotation
     #region GCD Logic
     protected override bool GeneralGCD(out IAction? act)
     {
+        ConfiteorPvE.Setting.StatusProvide = [];
         if (Player.HasStatus(true, StatusID.Requiescat))
         {
             if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true))
