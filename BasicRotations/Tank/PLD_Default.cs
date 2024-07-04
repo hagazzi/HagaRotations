@@ -39,11 +39,11 @@ public sealed class HagaPLD : PaladinRotation
     #region Countdown Logic
     protected override IAction? CountDownAction(float remainTime)
     {
-        //if (remainTime < HolySpiritPvE.Info.CastTime + CountDownAhead
-        //    && HolySpiritPvE.CanUse(out var act)) return act;
+        if (remainTime < HolySpiritPvE.Info.CastTime + CountDownAhead
+            && HolySpiritPvE.CanUse(out var act)) return act;
 
-        //if (remainTime < 15 && UseDivineVeilPre
-        //    && DivineVeilPvE.CanUse(out act)) return act;
+        if (remainTime < 15 && UseDivineVeilPre
+            && DivineVeilPvE.CanUse(out act)) return act;
 
         return base.CountDownAction(remainTime);
     }
@@ -93,9 +93,9 @@ public sealed class HagaPLD : PaladinRotation
     protected override bool DefenseAreaAbility(IAction nextGCD, out IAction? act)
     {
 
-        if (DivineVeilPvE.CanUse(out act)) return true;
+        //if (DivineVeilPvE.CanUse(out act)) return true;
 
-        if (PassageOfArmsPvE.CanUse(out act)) return true;
+        //if (PassageOfArmsPvE.CanUse(out act)) return true;
         return base.DefenseAreaAbility(nextGCD, out act);
     }
 
@@ -110,7 +110,7 @@ public sealed class HagaPLD : PaladinRotation
             if (BulwarkPvE.CanUse(out act, true) && NumberOfHostilesInRange > 2) return true;
 
             // If Oath can be used, use it and return true.
-            //if (UseOath(out act, true)) return true;
+            if (UseOath(out act, true)) return true;
 
             // If Rampart is not cooling down or has been cooling down for more than 60 seconds, and Sentinel can be used, use Sentinel and return true.
             if ((!RampartPvE.Cooldown.IsCoolingDown || RampartPvE.Cooldown.ElapsedAfter(60)) && SentinelPvE.CanUse(out act)) return true;
@@ -131,25 +131,34 @@ public sealed class HagaPLD : PaladinRotation
     protected override bool GeneralGCD(out IAction? act)
     {
         ConfiteorPvE.Setting.StatusProvide = [];
+
+
         if (Player.HasStatus(true, StatusID.Requiescat))
         {
-            if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true))
-            {
-                if (Player.HasStatus(true, StatusID.ConfiteorReady)) return true;
-                if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
-            }
-            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            //if (BoVPvE.CanUse(out act)) return true;
-            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            //if (BoTPvE.CanUse(out act)) return true;
-            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            //if (BoFPvE.CanUse(out act)) return true;
-            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
-            //if (ConfiPvE.CanUse(out act)) return true;
-            //if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            //if (HolyCirclePvE.CanUse(out act)) return true;
-            //if (HolySpiritPvE.CanUse(out act)) return true;
+            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (HolyCirclePvE.CanUse(out act)) return true;
+            if (HolySpiritPvE.CanUse(out act)) return true;
         }
+
+        //if (Player.HasStatus(true, StatusID.Requiescat))
+        //{
+        //    if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true))
+        //    {
+        //        if (Player.HasStatus(true, StatusID.ConfiteorReady)) return true;
+        //        if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
+        //    }
+        //if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+        //if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+        //if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+        //if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+        //if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+        //if (HolyCirclePvE.CanUse(out act)) return true;
+        //if (HolySpiritPvE.CanUse(out act)) return true;
+        //}
 
         //AOE
         if (HasDivineMight && HolyCirclePvE.CanUse(out act)) return true;
@@ -164,8 +173,8 @@ public sealed class HagaPLD : PaladinRotation
         if (!CombatElapsedLess(8) && HasGoringBladeReady && GoringBladePvE.CanUse(out act)) return true; // Dot
         if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(2))
         {
-            //if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(6) &&
-            //    HasDivineMight && !Player.HasStatus(true, StatusID.Requiescat) && HolySpiritPvE.CanUse(out act)) return true;
+            if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(6) &&
+                HasDivineMight && !Player.HasStatus(true, StatusID.Requiescat) && HolySpiritPvE.CanUse(out act)) return true;
             if (RageOfHalonePvE.CanUse(out act)) return true;
             if (AtonementPvE.CanUse(out act)) return true;
         }
@@ -185,11 +194,11 @@ public sealed class HagaPLD : PaladinRotation
 
 
         //Range
-        //if (UseHolyWhenAway)
-        //{
-        //    if (HolyCirclePvE.CanUse(out act)) return true;
-        //    if (HolySpiritPvE.CanUse(out act)) return true;
-        //}
+        if (UseHolyWhenAway)
+        {
+            if (HolyCirclePvE.CanUse(out act)) return true;
+            if (HolySpiritPvE.CanUse(out act)) return true;
+        }
         if (ShieldLobPvE.CanUse(out act)) return true;
 
         return base.GeneralGCD(out act);

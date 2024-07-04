@@ -2,7 +2,8 @@
   <PropertyGroup>
 	  <DalamudLibPath>$(AppData)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
 	  <Authors>Hagazzi</Authors>
-	  <Version>0.2.0</Version>	  
+	  <Version>0.2.1</Version>
+	  <OutDir>C:\XIV\Dasshym\pluginConfigs\RotationSolver\Rotations</OutDir>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Duty\PVPRotations\**" />

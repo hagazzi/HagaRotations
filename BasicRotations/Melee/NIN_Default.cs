@@ -380,6 +380,12 @@ public sealed class HagaNIN : NinjaRotation
         // Checks for the use of Hellfrog Medium or Bhavacakra under certain conditions:
         // - Not in the Mug's effective window or within Trick Attack's window
         // - Certain cooldown conditions are met, or specific statuses are active.
+
+        if (Ninki == 100)
+        {
+            if (HellfrogMediumPvE.CanUse(out act)) return true;
+            if (BhavacakraPvE.CanUse(out act)) return true;
+        }
         if ((!InMug || InTrickAttack)
             && (!BunshinPvE.Cooldown.WillHaveOneCharge(10) || Player.HasStatus(false, StatusID.PhantomKamaitachiReady) || MugPvE.Cooldown.WillHaveOneCharge(2)))
         {
