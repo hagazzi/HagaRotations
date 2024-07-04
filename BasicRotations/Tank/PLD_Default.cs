@@ -129,10 +129,10 @@ public sealed class HagaPLD : PaladinRotation
             //    if (Player.HasStatus(true, StatusID.ConfiteorReady)) return true;
             //    if (ConfiteorPvE.ID != ConfiteorPvE.AdjustedID) return true;
             //}
-            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
-            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
-            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
-            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
+            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, usedUp: true)) return true;
             //if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             //if (HolyCirclePvE.CanUse(out act)) return true;
