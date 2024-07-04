@@ -132,17 +132,21 @@ public sealed class HagaPLD : PaladinRotation
             if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            //if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            //if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            //if (HolyCirclePvE.CanUse(out act)) return true;
-            //if (HolySpiritPvE.CanUse(out act)) return true;
+            if (HolyCirclePvE.CanUse(out act)) return true;
+            if (HolySpiritPvE.CanUse(out act)) return true;
         }
 
         //AOE
         if (HasDivineMight && HolyCirclePvE.CanUse(out act)) return true;
-        if (ProminencePvE.CanUse(out act)) return true;
-        if (TotalEclipsePvE.CanUse(out act)) return true;
+        if (!Player.HasStatus(true, StatusID.Requiescat))
+        {
+            if (ProminencePvE.CanUse(out act)) return true;
+            if (TotalEclipsePvE.CanUse(out act)) return true;
+        }
+
 
         //Single
         if (!CombatElapsedLess(8) && HasGoringBladeReady && GoringBladePvE.CanUse(out act)) return true; // Dot
@@ -160,16 +164,19 @@ public sealed class HagaPLD : PaladinRotation
         if (HasSupplicationReady && SupplicationPvE.CanUse(out act)) return true;
         if (HasAtonementReady && AtoPvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
 
-        if (RageOfHalonePvE.CanUse(out act)) return true;
-        if (RiotBladePvE.CanUse(out act)) return true;
-        if (FastBladePvE.CanUse(out act)) return true;
+        if (!Player.HasStatus(true, StatusID.Requiescat))
+        {
+            if (RageOfHalonePvE.CanUse(out act)) return true;
+            if (RiotBladePvE.CanUse(out act)) return true;
+            if (FastBladePvE.CanUse(out act)) return true;
+        }
 
 
         //Range
         if (UseHolyWhenAway)
         {
-            //if (HolyCirclePvE.CanUse(out act)) return true;
-            //if (HolySpiritPvE.CanUse(out act)) return true;
+            if (HolyCirclePvE.CanUse(out act)) return true;
+            if (HolySpiritPvE.CanUse(out act)) return true;
         }
         if (ShieldLobPvE.CanUse(out act)) return true;
 
