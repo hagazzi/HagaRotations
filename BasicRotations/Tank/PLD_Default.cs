@@ -24,6 +24,9 @@ public sealed class HagaPLD : PaladinRotation
     private const ActionID AtoPvEActionId = (ActionID)16460;
     private IBaseAction AtoPvE = new BaseAction(AtoPvEActionId);
 
+    private const ActionID BoFPvEActionId = (ActionID)25748;
+    private IBaseAction BoFPvE = new BaseAction(BoFPvEActionId);
+
 
     #region Countdown Logic
     protected override IAction? CountDownAction(float remainTime)
@@ -129,7 +132,8 @@ public sealed class HagaPLD : PaladinRotation
             if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            //if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (BoFPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (ConfiteorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (HolyCirclePvE.CanUse(out act)) return true;
             if (HolySpiritPvE.CanUse(out act)) return true;
@@ -145,7 +149,7 @@ public sealed class HagaPLD : PaladinRotation
         if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(2))
         {
             if (!FightOrFlightPvE.Cooldown.WillHaveOneChargeGCD(6) &&
-                HasDivineMight && HolySpiritPvE.CanUse(out act)) return true;
+                HasDivineMight && !Player.HasStatus(true, StatusID.Requiescat) && HolySpiritPvE.CanUse(out act)) return true;
             if (RageOfHalonePvE.CanUse(out act)) return true;
             if (AtonementPvE.CanUse(out act)) return true;
         }
