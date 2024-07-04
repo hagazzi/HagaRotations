@@ -3,7 +3,7 @@ using static FFXIVClientStructs.FFXIV.Client.UI.Misc.DataCenterHelper;
 
 namespace DefaultRotations.Melee;
 
-[Rotation("Default", CombatType.PvE, GameVersion = "7.0")]
+[Rotation("HagaNIN", CombatType.PvE, GameVersion = "7.0")]
 [SourceCode(Path = "main/DefaultRotations/Melee/NIN_Default.cs")]
 [Api(2)]
 public sealed class HagaNIN : NinjaRotation
