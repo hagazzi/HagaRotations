@@ -360,7 +360,7 @@ public sealed class HagaNIN : NinjaRotation
 
             //!TrickAttackPvE.Cooldown.WillHaveOneCharge(19) &&
             // If Trick Attack is on cooldown but will not be ready soon, considers using Meisui to recover Ninki.
-            if (TrickAttackPvE.Cooldown.IsCoolingDown && Player.HasStatus(true, StatusID.ShadowWalker) && MeisPvE.CanUse(out act)) return true;
+            if (TrickAttackPvE.Cooldown.IsCoolingDown && Player.HasStatus(true, StatusID.ShadowWalker) && (Ninki <= 50) && MeisPvE.CanUse(out act)) return true;
             //MeisuiPvE.CanUse(out act)) return true;
         }
         // If none of the specific conditions are met, falls back to the base class's emergency ability logic.
