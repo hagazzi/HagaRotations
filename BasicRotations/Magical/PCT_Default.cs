@@ -89,10 +89,10 @@ public sealed class PCT_Default : PictomancerRotation
         bool HammerMotifReady = (WeaponMotifPvE.AdjustedID == 34668);
         bool WingMotifReady = (CreatureMotifPvE.AdjustedID == 34665);
         bool PomMotifReady = (CreatureMotifPvE.AdjustedID == 34664);
-        bool StarryMotifReady = (LandscapeMotifPvE.AdjustedID == 34691);
+        bool StarryMotifReady = (LandscapeMotifPvE.AdjustedID == 34669);
         //WeaponMotifPvE.AdjustedID == 34668 => rdy to cast HammerMotif, 34690 not ready to cast anything
         //CreatureMotifPve.AdjustedID == 34665 => rdy to cast WingMotif / 34664 =>rdy to cast PomMotif , 34689 not ready to cast anything
-        //LandscapeMotifPvE .AdjustedID == 34691 => rdy to cast StarrySkyMotif , 34669 not ready to cast anything
+        //LandscapeMotifPvE .AdjustedID ==  34669 => rdy to cast StarrySkyMotif , 34691 not ready to cast anything
 
         if (Player.HasStatus(true, StatusID.HammerTime) && HammerStampPvE.CanUse(out act, skipCastingCheck: true, skipAoeCheck: true)) return true;
 
