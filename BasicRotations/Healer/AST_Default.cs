@@ -77,6 +77,7 @@ public sealed class HagaAST : AstrologianRotation
     #region GCD Logic
     protected override bool GeneralGCD(out IAction? act)
     {
+
         ////LordoC 7444 and LadyoC 7445
         //if ((MinorArcanaPvE.AdjustedID == 7444) || (MinorArcanaPvE.AdjustedID == 7445))
         //{
@@ -202,7 +203,7 @@ public sealed class HagaAST : AstrologianRotation
         }
 
         //if (RedrawPvE.CanUse(out act)) return true;
-        if (InCombat && PlayCard(out act)) return true;
+        //if (InCombat && PlayCard(out act)) return true;
 
         //Play1 37019 Orig - Play2 37020 Orig - Play3 37021 Orig
 
@@ -210,7 +211,18 @@ public sealed class HagaAST : AstrologianRotation
 
         //Play1 37026 Spear - Play2 37027 Bole - Play3 37028 Ewer
 
-        if(PlayIPvE.AdjustedID != 37019)
+
+        //var tank = PartyMembers.GetJobCategory(JobRole.Tank);
+        //if (tank.Any(t => t.GetHealthRatio() < 0.99f))
+        //{
+
+        //} 
+        //else
+        //{ 
+        //}
+
+
+        if (PlayIPvE.AdjustedID != 37019)
         {
             if (InCombat && PlayIPvE.CanUse(out act)) return true;
         }

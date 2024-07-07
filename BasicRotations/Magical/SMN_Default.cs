@@ -155,5 +155,16 @@ public sealed class HagaSMN : SummonerRotation
     #region Extra Methods
     public override bool CanHealSingleSpell => false;
 
+        public override void DisplayStatus()
+        {
+            var IsTargetBoss = HostileTarget?.IsBossFromTTK() ?? false;
+            var IsTargetDying = HostileTarget?.IsDying() ?? false;
+
+            bool SolarB = (InBahamut || InSolarBahamut && (SummonSolarBahamutPvE.Cooldown.ElapsedOneChargeAfterGCD(3) || SummonBahamutPvE.Cooldown.ElapsedOneChargeAfterGCD(3) || IsTargetBoss && IsTargetDying));
+            ImGui.Text("Bahamud Enough Level " + SummonBahamutPvE.EnoughLevel.ToString());
+            ImGui.Text("SolarB B Enough Level " + SummonSolarBahamutPvE.EnoughLevel.ToString());
+            ImGui.Text("SolarB B statement " + SolarB.ToString());
+            base.DisplayStatus();
+        }
     #endregion
 }
