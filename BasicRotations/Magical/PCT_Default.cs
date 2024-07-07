@@ -1,4 +1,6 @@
-﻿namespace DefaultRotations.Magical;
+﻿using FFXIVClientStructs.FFXIV.Client.UI;
+
+namespace DefaultRotations.Magical;
 
 [Rotation("Default", CombatType.PvE, GameVersion = "7.0")]
 [SourceCode(Path = "main/DefaultRotations/Magical/PCT_Default.cs")]
@@ -12,6 +14,10 @@ public sealed class PCT_Default : PictomancerRotation
     private const ActionID WingMPVEActionID = (ActionID)34671;
     private IBaseAction WingMPvE = new BaseAction(WingMPVEActionID);
 
+    private bool MogofAgesReady = false;
+    private bool MogofAgesNotInCooldown = false;
+    private bool PomMotifAvailable = false;
+    private bool PomMuseAvailable = false;
 
     public override MedicineType MedicineType => MedicineType.Intelligence;
     #region Countdown logic
@@ -38,16 +44,52 @@ public sealed class PCT_Default : PictomancerRotation
         //LivingMusePve.AdjusteId == 34670 rdy to cast Pom Muse 34671 Winged Muse  , 35347 not ready to cast anything
         //SteelMusePve.AdjusteId == 34674 rdy to cast Striking Muse  , 35348 not ready to cast anything
         //ScenicMusePve.AdjusteId ==  34675, 35349 not ready to cast anything
-
+        bool PomMotifReady = (CreatureMotifPvE.AdjustedID == 34664);
         bool PomMuseReady = (LivingMusePvE.AdjustedID == 34670);
         bool WingedMusefReady = (LivingMusePvE.AdjustedID == 34671);
 
+        if(MogOfTheAgesPvE.Cooldown.IsCoolingDown)
+        {
+            MogofAgesNotInCooldown = false;
+            MogofAgesReady = false;
+            PomMotifAvailable = false;
+            PomMuseAvailable = false;
+        }
+
+        if (!MogOfTheAgesPvE.Cooldown.IsCoolingDown)
+        {
+            MogofAgesNotInCooldown = true;
+        }
+
+        if (MogofAgesNotInCooldown && !PomMotifAvailable && PomMotifReady)
+        {
+            PomMotifAvailable = true;
+        }
+
+        if (MogofAgesNotInCooldown && !PomMuseAvailable && PomMotifReady)
+        {
+            PomMuseAvailable = true;
+        }
+
+        if (MogofAgesNotInCooldown && (PomMuseAvailable || PomMotifAvailable))
+        {
+            MogofAgesReady = true;
+        }
+
         if (!Player.HasStatus(true, StatusID.SubtractivePalette) && (PaletteGauge >= 50) && SubtractivePalettePvE.CanUse(out act)) return true;
+
+        //landscape to be use before mog of ages
+        //if (LandscapeMotifDrawn && (PomMotifReady || PomMuseReady) && !MogOfTheAgesPvE.Cooldown.IsCoolingDown && StarryMusePvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+        if (LandscapeMotifDrawn && MogofAgesReady && !MogOfTheAgesPvE.Cooldown.IsCoolingDown && StarryMusePvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
         if (MogOfTheAgesPvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+
         if (CreatureMotifDrawn && PomMuseReady && PomMPvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
         if (CreatureMotifDrawn && WingedMusefReady && WingMPvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
         if (WeaponMotifDrawn && StrikingMusePvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
-        if (LandscapeMotifDrawn && StarryMusePvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+
+        //kept just in case
+        //if (LandscapeMotifDrawn && StarryMusePvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
+        
 
 
         return base.AttackAbility(nextGCD, out act);
@@ -157,6 +199,18 @@ public sealed class PCT_Default : PictomancerRotation
         ImGui.Text("-----");
         ImGui.Text("StarryMuse " + StarryMusePvE.AdjustedID.ToString());
         ImGui.Text("ScenicMuse adjID " + ScenicMusePvE.AdjustedID.ToString());
+
+        bool PomMotifReady = (CreatureMotifPvE.AdjustedID == 34664);
+        bool PomMuseReady = (LivingMusePvE.AdjustedID == 34670);
+        //pom starry sky
+        ImGui.Text("-----Pom Starry Sky");
+        ImGui.Text("PomMotifReady " + PomMotifReady.ToString());
+        ImGui.Text("PomMuseReady " + PomMuseReady.ToString());
+        ImGui.Text("StarryMuse " + StarryMusePvE.Cooldown.IsCoolingDown.ToString());
+        ImGui.Text("MogofAges enabled " + MogOfTheAgesPvE.IsEnabled.ToString());
+        ImGui.Text("MogofAges incooldown " + MogOfTheAgesPvE.IsInCooldown.ToString());
+        ImGui.Text("MogofAges iscoolingdown " + MogOfTheAgesPvE.Cooldown.IsCoolingDown.ToString());
+        ImGui.Text("MogofAges cooldown " + MogOfTheAgesPvE.Info.ToString());
 
         base.DisplayStatus();
     }
