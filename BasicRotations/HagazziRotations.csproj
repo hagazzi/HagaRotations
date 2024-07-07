@@ -2,7 +2,7 @@
   <PropertyGroup>
 	  <DalamudLibPath>$(AppData)\XIVLauncher\addon\Hooks\dev\</DalamudLibPath>
 	  <Authors>Hagazzi</Authors>
-	  <Version>0.2.0</Version>
+	  <Version>0.2.3</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Duty\PVPRotations\**" />
@@ -10,7 +10,7 @@
     <None Remove="Duty\PVPRotations\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="RotationSolverReborn.Basic" Version="7.0.0.14" />
+    <PackageReference Include="RotationSolverReborn.Basic" Version="7.0.0.16" />
   </ItemGroup>
   <ItemGroup>
 	  <Reference Include="Dalamud">
