@@ -66,7 +66,7 @@ public sealed class PCT_Default : PictomancerRotation
             PomMotifAvailable = true;
         }
 
-        if (MogofAgesNotInCooldown && !PomMuseAvailable && PomMotifReady)
+        if (MogofAgesNotInCooldown && !PomMuseAvailable && PomMuseReady)
         {
             PomMuseAvailable = true;
         }
