@@ -6,15 +6,6 @@
 public sealed class PCT_Default : PictomancerRotation
 {
 
-    private const ActionID WMPVEActionID = (ActionID)34665;
-    private IBaseAction WMPvE = new BaseAction(WMPVEActionID);
-
-    private const ActionID FiRPVEActionID = (ActionID)34650;
-    private IBaseAction FiRPvE = new BaseAction(FiRPVEActionID);
-
-    private const ActionID FiRIIPVEActionID = (ActionID)34656;
-    private IBaseAction FiRIIPvE = new BaseAction(FiRIIPVEActionID);
-
     private const ActionID PomMPVEActionID = (ActionID)34670;
     private IBaseAction PomMPvE = new BaseAction(PomMPVEActionID);
 
@@ -53,12 +44,8 @@ public sealed class PCT_Default : PictomancerRotation
 
         if (!Player.HasStatus(true, StatusID.SubtractivePalette) && (PaletteGauge >= 50) && SubtractivePalettePvE.CanUse(out act)) return true;
         if (MogOfTheAgesPvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
-        //act = null;
-        //if (WeaponMotifDrawn && SteelMusePvE.CanUse(out act)) return true;
-        //if (WeaponMotifDrawn && PomMusePvE.CanUse(out act, skipCastingCheck: true, skipAoeCheck: true)) return true;
         if (CreatureMotifDrawn && PomMuseReady && PomMPvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
         if (CreatureMotifDrawn && WingedMusefReady && WingMPvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
-        //if (CreatureMotifDrawn && LivingMusePvE.CanUse(out act)) return true;
         if (WeaponMotifDrawn && StrikingMusePvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
         if (LandscapeMotifDrawn && StarryMusePvE.CanUse(out act, skipStatusProvideCheck: true, skipComboCheck: true, skipCastingCheck: true, skipAoeCheck: true, usedUp: true)) return true;
 
@@ -96,20 +83,10 @@ public sealed class PCT_Default : PictomancerRotation
 
         if (Player.HasStatus(true, StatusID.HammerTime) && HammerStampPvE.CanUse(out act, skipCastingCheck: true, skipAoeCheck: true)) return true;
 
-        //
-        //Hammer Stamp
-        //
-        //if (!CreatureMotifDrawn && WingMotifReady && PomMotifPvE.CanUse(out act)) return true;
         if (!CreatureMotifDrawn && WingMotifReady && WingMotifPvE.CanUse(out act)) return true;
         if (!CreatureMotifDrawn && PomMotifReady && PomMotifPvE.CanUse(out act)) return true;
         if (!WeaponMotifDrawn && HammerMotifReady &&  HammerMotifPvE.CanUse(out act)) return true;
         if (!LandscapeMotifDrawn && StarryMotifReady && StarrySkyMotifPvE.CanUse(out act)) return true;
-        //if (!CreatureMotifDrawn && WingMotifPvE.CanUse(out act)) return true;
-        //if (!WeaponMotifDrawn && WeaponMotifPvE.CanUse(out act)) return true;
-        //if (!WeaponMotifDrawn && HammerStampPvE.CanUse(out act)) return true;
-        //if (!LandscapeMotifDrawn && LandscapeMotifPvE.CanUse(out act)) return true;
-        //act = null;
-
         if (Player.HasStatus(true, StatusID.SubtractivePalette))
         {
             //AOE
@@ -137,8 +114,6 @@ public sealed class PCT_Default : PictomancerRotation
             if (FireInRedPvE.CanUse(out act, skipCastingCheck: true)) return true;
         }
 
-        //if (FiRPvE.CanUse(out act)) return true;
-
 
         return base.GeneralGCD(out act);
     }
@@ -161,29 +136,6 @@ public sealed class PCT_Default : PictomancerRotation
 
     public override void DisplayStatus()
     {
-        //if (_ninActionAim != null)
-        //{
-        //    ImGui.Text(_ninActionAim.ToString() + _ninActionAim.AdjustedID.ToString());
-        //}
-        //ImGui.Text("LordoC " + LordOfCrownsPvE.AdjustedID.ToString());
-        //ImGui.Text("LadyoC " + LadyOfCrownsPvE.AdjustedID.ToString());
-        //ImGui.Text("MinorArcana " + MinorArcanaPvE.AdjustedID.ToString());
-        //ImGui.Text("AstralD " + AstralDrawPvE.AdjustedID.ToString());
-        //ImGui.Text("UmbralD " + UmbralDrawPvE.AdjustedID.ToString());
-        //ImGui.Text("Play1 " + PlayIPvE.AdjustedID.ToString());
-        //ImGui.Text("Play2 " + PlayIiPvE.AdjustedID.ToString());
-        //ImGui.Text("Play3 " + PlayIiiPvE.AdjustedID.ToString());
-        //ImGui.Text("HStamp " + HammerStampPvE.IsInCooldown.ToString());
-        //ImGui.Text("StrikingMuse cd " + StrikingMusePvE.IsInCooldown.ToString());
-        //ImGui.Text("StrikingMuse enabled " + StrikingMusePvE.IsEnabled.ToString());
-        //ImGui.Text("SteelMuse cd " + SteelMusePvE.IsInCooldown.ToString());
-        //ImGui.Text("SteelMuse enabled " + SteelMusePvE.IsEnabled.ToString());
-        //ImGui.Text("CreatureDrawn " + CreatureMotifDrawn.ToString());
-        //ImGui.Text("WeaponDrawn " + WeaponMotifDrawn.ToString());
-        //ImGui.Text("LandscrapeDrawn " + LandscapeMotifDrawn.ToString());
-        //ImGui.Text("WeaponMotif " + WeaponMotifPvE.IsInCooldown.ToString());
-        //ImGui.Text("HammerMotif " + HammerMotifPvE.IsInCooldown.ToString());
-
         //motif
         ImGui.Text("-----Motif");
         ImGui.Text("HammerMotif " + HammerMotifPvE.AdjustedID.ToString());
@@ -206,8 +158,6 @@ public sealed class PCT_Default : PictomancerRotation
         ImGui.Text("StarryMuse " + StarryMusePvE.AdjustedID.ToString());
         ImGui.Text("ScenicMuse adjID " + ScenicMusePvE.AdjustedID.ToString());
 
-
-        //ImGui.Text("HammerMotif " + HammerMotifPvE.IsInCooldown.ToString());
         base.DisplayStatus();
     }
     #endregion
