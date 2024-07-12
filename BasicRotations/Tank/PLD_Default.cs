@@ -136,7 +136,10 @@ public sealed class HagaPLD : PaladinRotation
 
         if (Player.HasStatus(true, StatusID.Requiescat))
         {
-            if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (Player.Level >= 100)
+            {
+                if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            }
             if (Player.Level >= 90)
             {
                 if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
