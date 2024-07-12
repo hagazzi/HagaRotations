@@ -146,7 +146,7 @@ public sealed class HagaPLD : PaladinRotation
                 if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
                 if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
             }
-            if (Player.Level >= 80)
+            if ((Player.Level >= 80) && (Player.StatusStack(true, StatusID.Requiescat) > 3))
             {
                 if (ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
             }
