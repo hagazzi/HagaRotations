@@ -140,7 +140,7 @@ public sealed class HagaPLD : PaladinRotation
             if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (ConfiteorPvE.EnoughLevel && ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
             if (HolyCirclePvE.CanUse(out act)) return true;
             if (HolySpiritPvE.CanUse(out act)) return true;
         }
