@@ -137,9 +137,12 @@ public sealed class HagaPLD : PaladinRotation
         if (Player.HasStatus(true, StatusID.Requiescat))
         {
             if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
-            if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            if (Player.Level >= 90)
+            {
+                if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+                if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
+                if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+            }
             if (Player.Level >= 80)
             {
                 if (ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
@@ -217,6 +220,16 @@ public sealed class HagaPLD : PaladinRotation
         if (InterventionPvE.CanUse(out act, usedUp: onLast)) return true;
 
         return false;
+    }
+
+    public override void DisplayStatus()
+    {
+        ImGui.Text("-----PLD");
+        ImGui.Text("Level: "+Player.Level.ToString());
+        ImGui.Text("Confi Enough Level: " + ConfiteorPvE.EnoughLevel.ToString());
+        ImGui.Text("BoT Enough Level: " + BladeOfTruthPvE.EnoughLevel.ToString());
+
+        base.DisplayStatus();
     }
     #endregion
 }
