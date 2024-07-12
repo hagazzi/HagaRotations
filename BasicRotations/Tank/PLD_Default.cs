@@ -231,7 +231,7 @@ public sealed class HagaPLD : PaladinRotation
         ImGui.Text("Level: "+Player.Level.ToString());
         ImGui.Text("Confi Enough Level: " + ConfiteorPvE.EnoughLevel.ToString());
         ImGui.Text("BoT Enough Level: " + BladeOfTruthPvE.EnoughLevel.ToString());
-
+        ImGui.Text("Requiescat Stacks: " + Player.StatusStack(true, StatusID.Requiescat).ToString());
         base.DisplayStatus();
     }
     #endregion
