@@ -140,11 +140,12 @@ public sealed class HagaPLD : PaladinRotation
             {
                 if (BladeOfHonorPvE.CanUse(out act, skipAoeCheck: true)) return true;
             }
-            if (Player.Level >= 90)
+            if ((Player.Level >= 90) && (Player.StatusStack(true, StatusID.Requiescat) < 4))
             {
-                if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
-                if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
-                if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+                //if (BladeOfValorPvE.CanUse(out act, skipAoeCheck: true)) return true;
+                //if (BladeOfTruthPvE.CanUse(out act, skipAoeCheck: true)) return true;
+                //if (BladeOfFaithPvE.CanUse(out act, skipAoeCheck: true)) return true;
+                if (ConfiPvE.CanUse(out act, skipAoeCheck: true)) return true;
             }
             if ((Player.Level >= 80) && (Player.StatusStack(true, StatusID.Requiescat) > 3))
             {
